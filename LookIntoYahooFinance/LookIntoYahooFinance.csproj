@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="YahooQuotesApi" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\BJK.FinanceApi\BJK.FinanceApi.csproj" />
   </ItemGroup>
 
