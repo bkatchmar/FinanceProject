@@ -17,3 +17,4 @@ I am combining my coding background with this new interest to help automate some
 - [ ] Define my decision making process over what to invest in next, or what my next moves may be
 - [ ] Currenly go with a week-over-week decision making model, but open the possibility to make bi-weekly or even monthly moves as my experience increases
 - [ ] Graduate from a CSV file and automatically update a Google Sheet document, this opens the possibility to use Google Lookout Studio for future visualizations of my data
+- [ ] Open up the possibilty for Forex trading down the road
