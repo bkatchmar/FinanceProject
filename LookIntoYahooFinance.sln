@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJK.FinanceApi", "BJK.Finan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJK.FinanceApi.Test", "BJK.FinanceApi.Test\BJK.FinanceApi.Test.csproj", "{FB9A1174-1BCA-4F52-8BA3-0D886BA39BA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJK.TickerExtract", "BJK.TickerExtract\BJK.TickerExtract.csproj", "{BBF3EFED-88B1-43FB-95C5-5EF78CCD7BBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{FB9A1174-1BCA-4F52-8BA3-0D886BA39BA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB9A1174-1BCA-4F52-8BA3-0D886BA39BA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB9A1174-1BCA-4F52-8BA3-0D886BA39BA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBF3EFED-88B1-43FB-95C5-5EF78CCD7BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBF3EFED-88B1-43FB-95C5-5EF78CCD7BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBF3EFED-88B1-43FB-95C5-5EF78CCD7BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBF3EFED-88B1-43FB-95C5-5EF78CCD7BBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

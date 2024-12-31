@@ -3,18 +3,12 @@
     using BJK.FinanceApi.Interfaces;
     using YahooQuotesApi;
 
-    public class YahooQuotesApiCaller : IDataExtractor
+    public class YahooQuotesApiCaller(IEnumerable<string> Symbols) : IDataExtractor
     {
-        public IEnumerable<string> Symbols { get; }
+        public IEnumerable<string> Symbols { get; } = Symbols;
         public IEnumerable<IFinanceInstrument> InstrumentsInformation => financeInstruments;
 
-        private List<IFinanceInstrument> financeInstruments;
-
-        public YahooQuotesApiCaller(IEnumerable<string> Symbols)
-        {
-            this.Symbols = Symbols;
-            financeInstruments = [];
-        }
+        private List<IFinanceInstrument> financeInstruments = [];
 
         public async Task GetInformation()
         {
