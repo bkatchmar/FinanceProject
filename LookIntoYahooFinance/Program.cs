@@ -2,7 +2,7 @@
 using BJK.FinanceApi.Classes;
 
 // TEST from console app, get AAPL, NVDA, and TSLA
-IEnumerable<string> TICKERS = new List<string>() { "AAPL", "NVDA", "TSLA" };
+IEnumerable<string> TICKERS = ["AAPL", "NVDA", "TSLA"];
 
 IDataExtractor yahooExtractor = new YahooQuotesApiCaller(TICKERS);
 
