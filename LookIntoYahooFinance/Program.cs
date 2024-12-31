@@ -1,20 +1,23 @@
-﻿using YahooQuotesApi;
+﻿using BJK.FinanceApi.Interfaces;
+using BJK.FinanceApi.Classes;
 
-IEnumerable<string> TICKERS = new List<string>() { "AAPL", "TSLA", "NVDA" };
+// TEST from console app, get AAPL, NVDA, and TSLA
+IEnumerable<string> TICKERS = new List<string>() { "AAPL", "NVDA", "TSLA" };
 
-YahooQuotes yahooQuotes = new YahooQuotesBuilder().Build();
+IDataExtractor yahooExtractor = new YahooQuotesApiCaller(TICKERS);
 
-Dictionary<string, Snapshot?> snapshots = await yahooQuotes.GetSnapshotAsync(TICKERS);
+Console.WriteLine("Calling API");
 
-foreach (KeyValuePair<string, Snapshot?> snapshot in snapshots)
+// Call data extractor
+await yahooExtractor.GetInformation();
+
+Console.WriteLine("Call Complete");
+Console.WriteLine("");
+
+foreach (IFinanceInstrument financeInstrument in yahooExtractor.InstrumentsInformation)
 {
-    Console.WriteLine($"Snapshot Data For: {snapshot.Key}");
-
-    if (snapshot.Value != null)
-    {
-        Console.WriteLine(snapshot.Value.LongName);
-        Console.WriteLine(snapshot.Value.AverageAnalystRating);
-    }
+    Console.WriteLine($"Stock Info For: {financeInstrument.Symbol}");
+    Console.WriteLine($"Name: {financeInstrument.Name}");
+    Console.WriteLine($"Rating: {financeInstrument.AnalystRating}");
+    Console.WriteLine("");
 }
-
-IEnumerable<string> RATINGS = new List<string>() { "1.9 - Buy", "2.8 - Hold", "1.3 - Strong Buy" };

@@ -4,12 +4,12 @@
     using System.Text.RegularExpressions;
     using YahooQuotesApi;
 
-    internal class YahooFinanceStockData : IFinanceInstrument
+    public class YahooFinanceStockData : IFinanceInstrument
     {
-        public bool Filled { get; private set; } = false;
-        public string Name { get; private set; } = string.Empty;
-        public string Symbol { get; private set; } = string.Empty;
-        public string AnalystRating { get; private set; } = string.Empty;
+        public bool Filled { get; } = false;
+        public string Name { get; } = string.Empty;
+        public string Symbol { get; } = string.Empty;
+        public string AnalystRating { get; } = string.Empty;
         public Snapshot? YahooSnapshopData { get; }
 
         public override bool Equals(object? obj)

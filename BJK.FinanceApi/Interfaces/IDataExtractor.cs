@@ -1,9 +1,9 @@
 ﻿namespace BJK.FinanceApi.Interfaces
 {
-    internal interface IDataExtractor
+    public interface IDataExtractor
     {
         IEnumerable<string> Symbols { get; }
         IEnumerable<IFinanceInstrument> InstrumentsInformation { get; }
-        void GetInformation();
+        Task GetInformation();
     }
 }

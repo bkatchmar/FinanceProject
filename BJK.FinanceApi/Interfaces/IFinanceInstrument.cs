@@ -1,6 +1,6 @@
 ﻿namespace BJK.FinanceApi.Interfaces
 {
-    internal interface IFinanceInstrument
+    public interface IFinanceInstrument
     {
         bool Filled { get; }
         string Name { get; }
