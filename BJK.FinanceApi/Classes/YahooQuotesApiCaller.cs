@@ -27,5 +27,15 @@
                 financeInstruments.Add(current);
             }
         }
+
+        public bool DoesInformationForFinancialInstrumentExists(string Symbol)
+        {
+            return financeInstruments.Any(i => i.Symbol == Symbol);
+        }
+
+        public IFinanceInstrument? GetFinanceInstrument(string Symbol)
+        {
+            return financeInstruments.Find(i => i.Symbol == Symbol);
+        }
     }
 }

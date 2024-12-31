@@ -9,7 +9,7 @@
         public bool Filled { get; } = false;
         public string Name { get; } = string.Empty;
         public string Symbol { get; } = string.Empty;
-        public string AnalystRating { get; } = string.Empty;
+        public string AnalystRating { get; } = "N/A";
         public Snapshot? YahooSnapshopData { get; }
 
         public override bool Equals(object? obj)
