@@ -18,7 +18,10 @@
             foreach (KeyValuePair<string, Snapshot?> snapshot in snapshots)
             {
                 IFinanceInstrument current = new YahooFinanceStockData(snapshot.Value);
-                financeInstruments.Add(current);
+                if (current.Filled)
+                {
+                    financeInstruments.Add(current);
+                }
             }
         }
 

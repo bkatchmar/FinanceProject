@@ -18,12 +18,25 @@ This whole project was born out of both the desire for a coding project exercise
 
 If we're dealing with only 5-6 stock tickers, this isn't that bad, but of course, I want to see everything possible, so naturally, I end up having to go through very copius amounts of data that can be very time consuming.
 
+# TickerExtract
+
+The purpose of this library is to collect the stock tickers from any type of source, for now it is a text file I copy and paste from a web site, but what if I want to store this data elsewhere at a later point in time? I am hoping this can be expanded upon and automated more at a later point in time.
+
+To accomplish this task of gathering tickers, two interfaces are used:
+
+```
+IReaderConfig
+ITickerCollector
+```
+
+The primary purpose of `IReaderConfig` is to store any actual information about how and where information is stored. Once we know this, `ITickerCollector` reads the info from the desired source and generates a list of the necessary tickers.
+
 # TO DO
 
 - [x] Use the [YahooQuotesApi](https://www.nuget.org/packages/YahooQuotesApi/) nuget package and understand its basic functions
 - [x] Create a base class structure around this API, with the possibility of using a different API in the future
-- [ ] Port over my ticker extraction code from a previous machine I was using, have that read from a list and gather the data for final compiliation
-- [ ] Generate a CSV file that acts as my core sheet
+- [x] Port over my ticker extraction code from a previous machine I was using, have that read from a list and gather the data for final compiliation
+- [x] Generate a CSV file that acts as my core sheet
 - [ ] Define my decision making process over what to invest in next, or what my next moves may be
 - [ ] Currenly go with a week-over-week decision making model, but open the possibility to make bi-weekly or even monthly moves as my experience increases
 - [ ] Graduate from a CSV file and automatically update a Google Sheet document, this opens the possibility to use Google Lookout Studio for future visualizations of my data

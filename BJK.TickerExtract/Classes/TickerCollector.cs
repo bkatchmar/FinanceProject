@@ -4,8 +4,8 @@
 
     public class TickerCollector : ITickerCollector
     {
-        private List<string> lines = new();
-        private List<string> tickers = new();
+        private List<string> lines = [];
+        private List<string> tickers = [];
 
         public IEnumerable<string> Tickers => tickers;
         public IEnumerable<string> Lines => lines;
@@ -20,6 +20,8 @@
                     string? line = reader.ReadLine();
                     if (!string.IsNullOrEmpty(line) && !line.Contains("Sector:"))
                     {
+                        line = line.TrimStart();
+                        line = line.TrimEnd();
                         string[] parts = line.Split(" ");
                         if (parts.Length > 0)
                         {

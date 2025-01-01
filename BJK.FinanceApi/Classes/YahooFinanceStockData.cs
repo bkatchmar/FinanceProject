@@ -28,6 +28,11 @@
             return false;
         }
 
+        public override string ToString()
+        {
+            return Symbol;
+        }
+
         public override int GetHashCode()
         {
             return Symbol.GetHashCode();
@@ -48,13 +53,22 @@
 
         private string GetRatingFromYahooString(string Rating)
         {
+            /*
+             * So for this library, ratings are put in the format of:
+             * 
+             * "1.9 - Buy", 
+             * "2.8 - Hold", 
+             * "1.3 - Strong Buy"
+             * 
+             * But we don't care for the number before the rating, so we use the below regex to extract this information
+             */
             Regex regex = new Regex(@"^[\d.]+\s*-\s*(.+)$");
             Match match = regex.Match(Rating);
             if (match.Success)
             {
                 return match.Groups[1].Value;
             }
-            return string.Empty;
+            return "N/A";
         }
     }
 }
