@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LookIntoYahooFinance", "LookIntoYahooFinance\LookIntoYahooFinance.csproj", "{00C63C9D-7BC6-4186-85CF-4214C3A97BB5}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJK.FinanceApi.Test", "BJK.FinanceApi.Test\BJK.FinanceApi.Test.csproj", "{FB9A1174-1BCA-4F52-8BA3-0D886BA39BA0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJK.TickerExtract", "BJK.TickerExtract\BJK.TickerExtract.csproj", "{BBF3EFED-88B1-43FB-95C5-5EF78CCD7BBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJK.Finance.DecisionMaking", "BJK.Finance.DecisionMaking\BJK.Finance.DecisionMaking.csproj", "{D31F3FAA-4B19-46DD-9610-3E070D066049}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJK.Finance.DecisionMaking.Test", "BJK.Finance.DecisionMaking.Test\BJK.Finance.DecisionMaking.Test.csproj", "{BBC5788E-3CD2-4A2E-8517-14E9D769D650}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{BBF3EFED-88B1-43FB-95C5-5EF78CCD7BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBF3EFED-88B1-43FB-95C5-5EF78CCD7BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBF3EFED-88B1-43FB-95C5-5EF78CCD7BBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D31F3FAA-4B19-46DD-9610-3E070D066049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D31F3FAA-4B19-46DD-9610-3E070D066049}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D31F3FAA-4B19-46DD-9610-3E070D066049}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D31F3FAA-4B19-46DD-9610-3E070D066049}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBC5788E-3CD2-4A2E-8517-14E9D769D650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBC5788E-3CD2-4A2E-8517-14E9D769D650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBC5788E-3CD2-4A2E-8517-14E9D769D650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBC5788E-3CD2-4A2E-8517-14E9D769D650}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

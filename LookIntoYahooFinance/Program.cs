@@ -6,6 +6,7 @@ using BJK.TickerExtract.Interfaces;
 // Load configurations
 IReaderConfig config = GetReaderData.Configuration;
 IManualTickerConfig manualTickerConfig = GetManualTickerData.Configuration;
+IPersonalData personalDataConfig = GetPersonalData.Configuration;
 
 // Might as well just check to see if we even have a file to write to
 if (string.IsNullOrEmpty(config.FileToWriteTo))
@@ -15,9 +16,7 @@ if (string.IsNullOrEmpty(config.FileToWriteTo))
 }
 
 // Assuming the above code did not run and we have a destination file to write to, run the rest of the program
-// ExampleTickerCollector
-// TickerCollector
-ITickerCollector tickerCollector = new ExampleTickerCollector();
+ITickerCollector tickerCollector = new TickerCollector();
 tickerCollector.Read(config);
 
 // Random message to know the program has started
