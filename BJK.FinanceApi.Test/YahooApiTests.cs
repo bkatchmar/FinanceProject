@@ -58,6 +58,9 @@
                 Assert.That(nvda?.AnalystRating, Is.Not.Empty);
                 Assert.That(tsla?.AnalystRating, Is.Not.Null);
                 Assert.That(tsla?.AnalystRating, Is.Not.Empty);
+                Assert.That(aapl?.SamplePrice, Is.GreaterThan(0));
+                Assert.That(nvda?.SamplePrice, Is.GreaterThan(0));
+                Assert.That(tsla?.SamplePrice, Is.GreaterThan(0));
             });
         }
     }

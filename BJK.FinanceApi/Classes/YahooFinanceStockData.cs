@@ -10,6 +10,7 @@
         public string Name { get; } = string.Empty;
         public string Symbol { get; } = string.Empty;
         public string AnalystRating { get; } = "N/A";
+        public decimal SamplePrice { get; } = decimal.Zero;
         public Snapshot? YahooSnapshopData { get; }
 
         public override bool Equals(object? obj)
@@ -48,6 +49,7 @@
                 Name = Data.LongName;
                 Symbol = Data.Symbol.Name;
                 AnalystRating = GetRatingFromYahooString(Data.AverageAnalystRating);
+                SamplePrice = Data.RegularMarketPrice;
             }
         }
 

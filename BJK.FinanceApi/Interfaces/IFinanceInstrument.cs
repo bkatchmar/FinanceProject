@@ -6,5 +6,6 @@
         string Name { get; }
         string Symbol { get; }
         string AnalystRating { get; }
+        decimal SamplePrice { get; }
     }
 }
