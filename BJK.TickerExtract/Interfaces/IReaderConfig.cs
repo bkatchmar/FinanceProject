@@ -4,5 +4,6 @@
     {
         string FileNameToReadFrom {  get; }
         string FileToWriteTo { get; }
+        string NextMovesFile { get; }
     }
 }

@@ -9,5 +9,6 @@
         public string Symbol { get; set; } = string.Empty;
         public string AnalystRating { get; set; } = string.Empty;
         public decimal SamplePrice { get; set; } = decimal.Zero;
+        public override string ToString() => Symbol;
     }
 }

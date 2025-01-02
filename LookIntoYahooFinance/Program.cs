@@ -1,4 +1,6 @@
-﻿using BJK.FinanceApi.Classes;
+﻿using BJK.Finance.DecisionMaking.Classes;
+using BJK.Finance.DecisionMaking.Interfaces;
+using BJK.FinanceApi.Classes;
 using BJK.FinanceApi.Interfaces;
 using BJK.TickerExtract.Classes;
 using BJK.TickerExtract.Interfaces;
@@ -19,31 +21,46 @@ if (string.IsNullOrEmpty(config.FileToWriteTo))
 ITickerCollector tickerCollector = new TickerCollector();
 tickerCollector.Read(config);
 
-// Random message to know the program has started
-Console.WriteLine($"Processing {tickerCollector.Tickers.Count().ToString("N0")} tickers");
-
 // Call the API
-IDataExtractor yahooExtractor = new YahooQuotesApiCaller(tickerCollector.Tickers);
+List<string> allTickers = tickerCollector.Tickers.Concat(manualTickerConfig.ToAdd).ToList();
+foreach (string toOmit in manualTickerConfig.ToOmit)
+{
+    allTickers.Remove(toOmit);
+}
+
+// Random message to know the program has started
+Console.WriteLine($"Processing {allTickers.Count().ToString("N0")} tickers");
+IDataExtractor yahooExtractor = new YahooQuotesApiCaller(allTickers);
 
 // Call data extractor
 await yahooExtractor.GetInformation();
 
 // Begin Write Output
-using StreamWriter writer = new(config.FileToWriteTo, false);
-
-// Add Tickers Not Found In The Normal List And We Want To Manually Add
-foreach (string manualAdd in manualTickerConfig.ToAdd)
-{
-    writer.WriteLine($"{manualAdd},N/A");
-}
+using StreamWriter normalFileWriter = new(config.FileToWriteTo, false);
 
 // Write The Normal File
 foreach (IFinanceInstrument financeInstrument in yahooExtractor.InstrumentsInformation)
 {
-    if (!manualTickerConfig.ToOmit.Contains(financeInstrument.Symbol))
-    {
-        writer.WriteLine($"{financeInstrument.Symbol},{financeInstrument.AnalystRating}");
-    }
+    normalFileWriter.WriteLine($"{financeInstrument.Symbol},{financeInstrument.AnalystRating}");
 }
 
-Console.WriteLine("All tickers have been processed, check the CSV file");
+Console.WriteLine("Normal CSV File With Tickers and Analysts Ratings Ready");
+normalFileWriter.Close();
+await normalFileWriter.DisposeAsync();
+
+Console.WriteLine("Begin writing the next moves file");
+
+// Start looking into the decision maker
+IAutomateDecision decisionMaker = new DecisionMaker(personalDataConfig, yahooExtractor.InstrumentsInformation);
+decisionMaker.BuildStrategies();
+
+// Start writing to next moves possible file
+using StreamWriter nextMovesFiles = new(config.NextMovesFile, false);
+nextMovesFiles.WriteLine("Symbol,Security Name,Rating,Strategy,Instruments Can Afford");
+
+foreach (IOptionStrategyPossibility nextMove in decisionMaker.PossibleOptionsStrategies)
+{
+    nextMovesFiles.WriteLine($"{nextMove.FinanceInstrument.Symbol},\"{nextMove.FinanceInstrument.Name}\",{nextMove.FinanceInstrument.AnalystRating},{nextMove.Strategy},{nextMove.ContractsCanAfford}");
+}
+
+Console.WriteLine("Next Moves File Done");

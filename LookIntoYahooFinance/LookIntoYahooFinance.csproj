@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BJK.Finance.DecisionMaking\BJK.Finance.DecisionMaking.csproj" />
     <ProjectReference Include="..\BJK.FinanceApi\BJK.FinanceApi.csproj" />
     <ProjectReference Include="..\BJK.TickerExtract\BJK.TickerExtract.csproj" />
   </ItemGroup>

@@ -20,6 +20,8 @@ If we're dealing with only 5-6 stock tickers, this isn't that bad, but of course
 
 # TickerExtract
 
+## Reading and Collecting the Tickers
+
 The purpose of this library is to collect the stock tickers from any type of source, for now it is a text file I copy and paste from a web site, but what if I want to store this data elsewhere at a later point in time? I am hoping this can be expanded upon and automated more at a later point in time.
 
 To accomplish this task of gathering tickers, two interfaces are used:
@@ -30,6 +32,14 @@ ITickerCollector
 ```
 
 The primary purpose of `IReaderConfig` is to store any actual information about how and where information is stored. Once we know this, `ITickerCollector` reads the info from the desired source and generates a list of the necessary tickers.
+
+## Manually Adding and Omitting Tickers
+
+The main purpose here is to manually add tickers that the file pull may not pick up but we know meet our criteria and to also omit tickers if we do not wish to see specific tickers processed.
+
+# FinanceApi
+
+The purpose of this library is to collect market data for financial instrumnents. Right now we're using a Yahoo Quotes NuGet package, but designed to call other APIs should the need to arise.
 
 # TO DO
 

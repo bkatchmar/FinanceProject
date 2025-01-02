@@ -7,5 +7,7 @@
     {
         IPersonalData PersonalDataConfig { get; }
         IEnumerable<IFinanceInstrument> InstrumentsInformation { get; }
+        IEnumerable<IOptionStrategyPossibility> PossibleOptionsStrategies { get; }
+        void BuildStrategies();
     }
 }
