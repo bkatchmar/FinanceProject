@@ -6,7 +6,9 @@ I've been really getting into options trading along with dividend investing. As 
 * Stock must at least have a "Hold" rating by wall street analysts
 * Being a dividend paying stock is a plus but not a requirement
 
-I am combining my coding background with this new interest to help automate some of my data gathering, possibly then use this information going forward to help automate some of my decision making
+I am combining my coding background with this new interest to help automate some of my data gathering, possibly then use this information going forward to help automate some of my decision making.
+
+Project has been created in Visual Studio 2022 as a standard console project.
 
 ## Manual Steps
 
@@ -35,7 +37,23 @@ The primary purpose of `IReaderConfig` is to store any actual information about 
 
 ## Manually Adding and Omitting Tickers
 
-The main purpose here is to manually add tickers that the file pull may not pick up but we know meet our criteria and to also omit tickers if we do not wish to see specific tickers processed.
+The main purpose here is to manually add tickers that the file pull may not pick up but we know meet our criteria and to also omit tickers if we do not wish to see specific tickers processed. We accomplish this via the `IManualTickerConfig` interface.
+
+## Manual Personal Data
+
+Right now there are three main points of interest here. This is handled via the `IPersonalData` Interface.
+
+### Uninvested Cash
+
+A decimal number pointing out how much uninvested cash we have on hand, this helps us generate the necessary report.
+
+### Minumum Units To Buy
+
+I don't want to entertain any security unless I can purchase the minimum amount with my uninvested cash.
+
+### Ratings Tolerance
+
+I want to filter out stocks that may have a "Sell" or "Strong Sell" rating. Maybe I only want to focus on "Strong Buy" stocks, this array lets me customize which stocks I want to see.
 
 # FinanceApi
 
