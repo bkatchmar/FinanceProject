@@ -5,6 +5,7 @@
     public class GetPersonalData
     {
         private const string READER_FILE = "PersonalData.json";
+        private const string FOLDER_NAME = "FinanceDecisionMaker";
         private static PersonalDataConfig? config;
 
         public static IPersonalData Configuration => GetConfig();
@@ -15,7 +16,7 @@
 
             if (config == null)
             {
-                string baseDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Resources";
+                string baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + FOLDER_NAME;
                 string fileName = string.Concat(baseDirectory, "\\", READER_FILE);
 
                 using StreamReader reader = new(fileName);
@@ -30,7 +31,7 @@
 
         private static void MakeSureFileExists()
         {
-            string baseDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Resources";
+            string baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + FOLDER_NAME;
             string fileName = string.Concat(baseDirectory, "\\", READER_FILE);
 
             if (!Directory.Exists(baseDirectory))

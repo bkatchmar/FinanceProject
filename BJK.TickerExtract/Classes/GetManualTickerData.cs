@@ -6,7 +6,8 @@
     public static class GetManualTickerData
     {
         private const string READER_FILE = "ManualTickers.json";
-        private static ManualTickerConfiguration? config;
+        private const string FOLDER_NAME = "FinanceDecisionMaker";
+        private static BrianCustomManualTickerConfiguration? config;
 
         public static IManualTickerConfig Configuration => GetConfig();
 
@@ -16,22 +17,22 @@
 
             if (config == null)
             {
-                string baseDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Resources";
+                string baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + FOLDER_NAME;
                 string fileName = string.Concat(baseDirectory, "\\", READER_FILE);
 
                 using StreamReader reader = new(fileName);
                 string fileData = reader.ReadToEnd();
                 reader.Close();
 
-                config = JsonConvert.DeserializeObject<ManualTickerConfiguration>(fileData);
+                config = JsonConvert.DeserializeObject<BrianCustomManualTickerConfiguration>(fileData);
             }
 
-            return config ?? new ManualTickerConfiguration();
+            return config ?? new BrianCustomManualTickerConfiguration();
         }
 
         private static void MakeSureFileExists()
         {
-            string baseDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Resources";
+            string baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + FOLDER_NAME;
             string fileName = string.Concat(baseDirectory, "\\", READER_FILE);
 
             if (!Directory.Exists(baseDirectory))
@@ -41,7 +42,7 @@
 
             if (!File.Exists(fileName))
             {
-                ManualTickerConfiguration defaultConfig = new();
+                BrianCustomManualTickerConfiguration defaultConfig = new();
                 string json = JsonConvert.SerializeObject(defaultConfig);
                 using StreamWriter sw = new(fileName, false);
                 sw.WriteLine(json);

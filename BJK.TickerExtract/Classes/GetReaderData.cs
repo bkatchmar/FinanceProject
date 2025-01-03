@@ -6,6 +6,7 @@
     public static class GetReaderData
     {
         private const string READER_FILE = "ReaderConfig.json";
+        private const string FOLDER_NAME = "FinanceDecisionMaker";
         private static ReaderConfiguration? config;
 
         public static IReaderConfig Configuration => GetConfig();
@@ -16,7 +17,7 @@
 
             if (config == null)
             {
-                string baseDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Resources";
+                string baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + FOLDER_NAME;
                 string fileName = string.Concat(baseDirectory, "\\", READER_FILE);
 
                 using StreamReader reader = new(fileName);
@@ -31,7 +32,7 @@
 
         private static void MakeSureFileExists()
         {
-            string baseDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\Resources";
+            string baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\" + FOLDER_NAME;
             string fileName = string.Concat(baseDirectory, "\\", READER_FILE);
 
             if (!Directory.Exists(baseDirectory))
