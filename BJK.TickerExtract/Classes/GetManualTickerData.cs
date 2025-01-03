@@ -7,7 +7,7 @@
     {
         private const string READER_FILE = "ManualTickers.json";
         private const string FOLDER_NAME = "FinanceDecisionMaker";
-        private static BrianCustomManualTickerConfiguration? config;
+        private static ManualTickerConfiguration? config;
 
         public static IManualTickerConfig Configuration => GetConfig();
 
@@ -24,10 +24,10 @@
                 string fileData = reader.ReadToEnd();
                 reader.Close();
 
-                config = JsonConvert.DeserializeObject<BrianCustomManualTickerConfiguration>(fileData);
+                config = JsonConvert.DeserializeObject<ManualTickerConfiguration>(fileData);
             }
 
-            return config ?? new BrianCustomManualTickerConfiguration();
+            return config ?? new ManualTickerConfiguration();
         }
 
         private static void MakeSureFileExists()
@@ -42,7 +42,7 @@
 
             if (!File.Exists(fileName))
             {
-                BrianCustomManualTickerConfiguration defaultConfig = new();
+                ManualTickerConfiguration defaultConfig = new();
                 string json = JsonConvert.SerializeObject(defaultConfig);
                 using StreamWriter sw = new(fileName, false);
                 sw.WriteLine(json);
