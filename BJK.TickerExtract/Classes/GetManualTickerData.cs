@@ -26,7 +26,7 @@
                 config = JsonConvert.DeserializeObject<ManualTickerConfiguration>(fileData);
             }
 
-            return config;
+            return config ?? new ManualTickerConfiguration();
         }
 
         private static void MakeSureFileExists()

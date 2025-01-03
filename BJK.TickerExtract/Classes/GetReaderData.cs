@@ -26,7 +26,7 @@
                 config = JsonConvert.DeserializeObject<ReaderConfiguration>(fileData);
             }
 
-            return config;
+            return config ?? new ReaderConfiguration();
         }
 
         private static void MakeSureFileExists()

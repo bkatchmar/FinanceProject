@@ -25,7 +25,7 @@
                 config = JsonConvert.DeserializeObject<PersonalDataConfig>(fileData);
             }
 
-            return config;
+            return config ?? new PersonalDataConfig();
         }
 
         private static void MakeSureFileExists()
