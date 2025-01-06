@@ -18,8 +18,8 @@ if (string.IsNullOrEmpty(config.FileToWriteTo))
 }
 
 // Assuming the above code did not run and we have a destination file to write to, run the rest of the program
-CsvTickerCollector tickerCollector = new();
-tickerCollector.Read(config);
+CboeWeeklyCsvDownloader tickerCollector = new();
+await tickerCollector.ReadAsync(config);
 
 // Call the API
 List<string> allTickers = tickerCollector.Tickers.Concat(manualTickerConfig.ToAdd).ToList();

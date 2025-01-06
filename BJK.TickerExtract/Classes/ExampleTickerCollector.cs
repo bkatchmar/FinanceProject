@@ -10,5 +10,10 @@ namespace BJK.TickerExtract.Classes
         {
 
         }
+        public Task ReadAsync(IReaderConfig ReaderConfig)
+        {
+            Read(ReaderConfig);
+            return Task.CompletedTask;
+        }
     }
 }

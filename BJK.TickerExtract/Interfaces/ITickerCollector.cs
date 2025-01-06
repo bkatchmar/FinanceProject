@@ -5,5 +5,6 @@
         IEnumerable<string> Tickers { get; }
         IEnumerable<string> Lines { get; }
         void Read(IReaderConfig ReaderConfig);
+        Task ReadAsync(IReaderConfig ReaderConfig);
     }
 }
