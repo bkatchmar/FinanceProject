@@ -18,7 +18,7 @@ if (string.IsNullOrEmpty(config.FileToWriteTo))
 }
 
 // Assuming the above code did not run and we have a destination file to write to, run the rest of the program
-ITickerCollector tickerCollector = new TickerCollector();
+CsvTickerCollector tickerCollector = new();
 tickerCollector.Read(config);
 
 // Call the API
@@ -29,8 +29,8 @@ foreach (string toOmit in manualTickerConfig.ToOmit)
 }
 
 // Random message to know the program has started
-Console.WriteLine($"Processing {allTickers.Count().ToString("N0")} tickers");
-IDataExtractor yahooExtractor = new YahooQuotesApiCaller(allTickers);
+Console.WriteLine($"Processing {allTickers.Count.ToString("N0")} tickers");
+YahooQuotesApiCaller yahooExtractor = new(allTickers);
 
 // Call data extractor
 await yahooExtractor.GetInformation();
@@ -51,7 +51,7 @@ await normalFileWriter.DisposeAsync();
 Console.WriteLine("Begin writing the next moves file");
 
 // Start looking into the decision maker
-IAutomateDecision decisionMaker = new DecisionMaker(personalDataConfig, yahooExtractor.InstrumentsInformation);
+DecisionMaker decisionMaker = new(personalDataConfig, yahooExtractor.InstrumentsInformation);
 decisionMaker.BuildStrategies();
 
 // Start writing to next moves possible file
