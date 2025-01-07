@@ -64,3 +64,4 @@ foreach (IOptionStrategyPossibility nextMove in decisionMaker.PossibleOptionsStr
 }
 
 Console.WriteLine("Next Moves File Done");
+await nextMovesFiles.DisposeAsync();
