@@ -14,21 +14,21 @@ Project has been created in Visual Studio 2022 as a standard console project.
 
 This whole project was born out of both the desire for a coding project exercise and to automate the steps I take in helping me make invesment decisions. The steps involved are:
 
-1. Extract the tickers from [Weekly Options USA](https://www.weeklyoptionsusa.com/which-stocks-have-weekly-options.html) and put them in a CSV file
+1. Extract the tickers from [CBOE Available Weeklys](https://www.cboe.com/available_weeklys/get_csv_download/) from the downloaded CSV file
 2. Pair the tickers with the rating publishing on [Stock Analysis](https://stockanalysis.com/stocks/tsla/forecast/)
 3. Put the data in my Google Sheets document and update the Google Lookout Studio Report to visualize the data
 
 If we're dealing with only 5-6 stock tickers, this isn't that bad, but of course, I want to see everything possible, so naturally, I end up having to go through very copius amounts of data that can be very time consuming.
 
-# TickerExtract
+## TickerExtract
 
-## Reading and Collecting the Tickers
+### Reading and Collecting the Tickers
 
 The purpose of this library is to collect the stock tickers from any type of source, for now it is a text file I copy and paste from a web site, but what if I want to store this data elsewhere at a later point in time? I am hoping this can be expanded upon and automated more at a later point in time.
 
 To accomplish this task of gathering tickers, two interfaces are used:
 
-```
+```C#
 IReaderConfig
 ITickerCollector
 ```
@@ -55,17 +55,17 @@ I don't want to entertain any security unless I can purchase the minimum amount 
 
 I want to filter out stocks that may have a "Sell" or "Strong Sell" rating. Maybe I only want to focus on "Strong Buy" stocks, this array lets me customize which stocks I want to see.
 
-# FinanceApi
+## FinanceApi
 
 The purpose of this library is to collect market data for financial instrumnents. Right now we're using a Yahoo Quotes NuGet package, but designed to call other APIs should the need to arise.
 
-# TO DO
+## TO DO
 
-- [x] Use the [YahooQuotesApi](https://www.nuget.org/packages/YahooQuotesApi/) nuget package and understand its basic functions
-- [x] Create a base class structure around this API, with the possibility of using a different API in the future
-- [x] Port over my ticker extraction code from a previous machine I was using, have that read from a list and gather the data for final compiliation
-- [x] Generate a CSV file that acts as my core sheet
-- [ ] Define my decision making process over what to invest in next, or what my next moves may be
-- [ ] Currenly go with a week-over-week decision making model, but open the possibility to make bi-weekly or even monthly moves as my experience increases
-- [ ] Graduate from a CSV file and automatically update a Google Sheet document, this opens the possibility to use Google Lookout Studio for future visualizations of my data
-- [ ] Open up the possibilty for Forex trading down the road
+* [x] Use the [YahooQuotesApi](https://www.nuget.org/packages/YahooQuotesApi/) nuget package and understand its basic functions
+* [x] Create a base class structure around this API, with the possibility of using a different API in the future
+* [x] Port over my ticker extraction code from a previous machine I was using, have that read from a list and gather the data for final compiliation
+* [x] Generate a CSV file that acts as my core sheet
+* [ ] Define my decision making process over what to invest in next, or what my next moves may be
+* [ ] Currenly go with a week-over-week decision making model, but open the possibility to make bi-weekly or even monthly moves as my experience increases
+* [ ] Graduate from a CSV file and automatically update a Google Sheet document, this opens the possibility to use Google Lookout Studio for future visualizations of my data
+* [ ] Open up the possibilty for Forex trading down the road
