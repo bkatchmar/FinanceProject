@@ -65,7 +65,7 @@ The purpose of this library is to collect market data for financial instrumnents
 * [x] Create a base class structure around this API, with the possibility of using a different API in the future
 * [x] Port over my ticker extraction code from a previous machine I was using, have that read from a list and gather the data for final compiliation
 * [x] Generate a CSV file that acts as my core sheet
-* [ ] Define my decision making process over what to invest in next, or what my next moves may be
+* [x] Define my decision making process over what to invest in next, or what my next moves may be
 * [ ] Currenly go with a week-over-week decision making model, but open the possibility to make bi-weekly or even monthly moves as my experience increases
 * [ ] Graduate from a CSV file and automatically update a Google Sheet document, this opens the possibility to use Google Lookout Studio for future visualizations of my data
 * [ ] Open up the possibilty for Forex trading down the road
