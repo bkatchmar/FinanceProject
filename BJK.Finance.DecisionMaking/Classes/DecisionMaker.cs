@@ -6,7 +6,7 @@
 
     public class DecisionMaker(IPersonalData Personal, IEnumerable<IFinanceInstrument> InstrumentData) : IAutomateDecision
     {
-        private List<IOptionStrategyPossibility> possibleMoves = new();
+        private readonly List<IOptionStrategyPossibility> possibleMoves = [];
         public IPersonalData PersonalDataConfig { get; } = Personal;
         public IEnumerable<IFinanceInstrument> InstrumentsInformation { get; } = InstrumentData;
         public IEnumerable<IOptionStrategyPossibility> PossibleOptionsStrategies => possibleMoves;
@@ -16,8 +16,8 @@
         {
             int contactsWillingToBuy = PersonalDataConfig.MinumumUnitsToBuy / 100;
 
-            List<IOptionStrategyPossibility> coverCalls = new();
-            List<IOptionStrategyPossibility> cashSecuredPuts = new();
+            List<IOptionStrategyPossibility> coverCalls = [];
+            List<IOptionStrategyPossibility> cashSecuredPuts = [];
 
             foreach (IFinanceInstrument financeInstrument in InstrumentsInformation)
             {
