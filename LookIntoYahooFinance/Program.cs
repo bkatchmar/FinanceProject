@@ -59,7 +59,10 @@ await normalFileWriter.DisposeAsync();
 Console.WriteLine("Begin writing the next moves file");
 
 // Start looking into the decision maker
-DecisionMaker decisionMaker = new(personalDataConfig, yahooExtractor.InstrumentsInformation);
+DecisionMaker decisionMaker = new(personalDataConfig, yahooExtractor.InstrumentsInformation)
+{
+    IncludeCoveCalls = false
+};
 decisionMaker.BuildStrategies();
 
 // Start writing to next moves possible file

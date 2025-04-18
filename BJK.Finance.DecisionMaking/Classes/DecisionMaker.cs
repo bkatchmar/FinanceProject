@@ -6,16 +6,18 @@
 
     public class DecisionMaker(IPersonalData Personal, IEnumerable<IFinanceInstrument> InstrumentData) : IAutomateDecision
     {
-        private List<IOptionStrategyPossibility> possibleMoves = new();
+        private readonly List<IOptionStrategyPossibility> possibleMoves = [];
         public IPersonalData PersonalDataConfig { get; } = Personal;
         public IEnumerable<IFinanceInstrument> InstrumentsInformation { get; } = InstrumentData;
         public IEnumerable<IOptionStrategyPossibility> PossibleOptionsStrategies => possibleMoves;
+        public bool IncludeCoveCalls { get; set; } = true;
+        public bool IncludeCashSecuredPuts { get; set; } = true;
         public void BuildStrategies()
         {
             int contactsWillingToBuy = PersonalDataConfig.MinumumUnitsToBuy / 100;
-            
-            List<IOptionStrategyPossibility> coverCalls = new();
-            List<IOptionStrategyPossibility> cashSecuredPuts = new();
+
+            List<IOptionStrategyPossibility> coverCalls = [];
+            List<IOptionStrategyPossibility> cashSecuredPuts = [];
 
             foreach (IFinanceInstrument financeInstrument in InstrumentsInformation)
             {
@@ -28,8 +30,15 @@
                 cashSecuredPuts.Add(cashSecuredPut);
             }
 
-            possibleMoves.AddRange(coverCalls.Where(s => s.ContractsCanAfford >= contactsWillingToBuy && PersonalDataConfig.RatingsTolerance.ToList().Contains(s.FinanceInstrument.AnalystRating)));
-            possibleMoves.AddRange(cashSecuredPuts.Where(s => s.ContractsCanAfford >= contactsWillingToBuy && PersonalDataConfig.RatingsTolerance.ToList().Contains(s.FinanceInstrument.AnalystRating)));
+            if (IncludeCoveCalls)
+            {
+                possibleMoves.AddRange(coverCalls.Where(s => s.ContractsCanAfford >= contactsWillingToBuy && PersonalDataConfig.RatingsTolerance.ToList().Contains(s.FinanceInstrument.AnalystRating)).OrderByDescending(s => s.ContractsCanAfford));
+            }
+
+            if (IncludeCashSecuredPuts)
+            {
+                possibleMoves.AddRange(cashSecuredPuts.Where(s => s.ContractsCanAfford >= contactsWillingToBuy && PersonalDataConfig.RatingsTolerance.ToList().Contains(s.FinanceInstrument.AnalystRating)).OrderByDescending(s => s.ContractsCanAfford));
+            }
         }
     }
 }
