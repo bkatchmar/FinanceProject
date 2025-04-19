@@ -7,12 +7,10 @@ using BJK.TickerExtract.Interfaces;
 using Microsoft.Extensions.Configuration;
 
 // Load configurations
-// Program Start
 IConfigurationRoot configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .Build();
-
 
 IReaderConfig? config = configuration.GetSection("ReaderConfig").Get<ReaderConfiguration>();
 IManualTickerConfig? manualTickerConfig = configuration.GetSection("ManualTickers").Get<ManualTickerConfiguration>();
