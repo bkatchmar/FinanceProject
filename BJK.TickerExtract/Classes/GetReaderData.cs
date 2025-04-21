@@ -2,15 +2,36 @@
 {
     using BJK.TickerExtract.Interfaces;
     using Newtonsoft.Json;
+    using Microsoft.Extensions.Configuration;
 
     public static class GetReaderData
     {
         private const string READER_FILE = "ReaderConfig.json";
         private const string FOLDER_NAME = "FinanceDecisionMaker";
+        private const string APP_SETTINGS = "appsettings.json";
         private static ReaderConfiguration? config;
 
-        public static IReaderConfig Configuration => GetConfig();
+        public static IReaderConfig Configuration => GetConfigFromAppSettingsFile();
 
+        private static IReaderConfig GetConfigFromAppSettingsFile()
+        {
+            if (config == null)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile(APP_SETTINGS, optional: false, reloadOnChange: true)
+                    .Build();
+
+                ReaderConfiguration? readFromAppsettings = configuration.GetSection("ReaderConfig").Get<ReaderConfiguration>();
+
+                if (readFromAppsettings != null)
+                {
+                    config = readFromAppsettings;
+                }
+            }
+
+            return config ?? new ReaderConfiguration();
+        }
         private static IReaderConfig GetConfig()
         {
             MakeSureFileExists();

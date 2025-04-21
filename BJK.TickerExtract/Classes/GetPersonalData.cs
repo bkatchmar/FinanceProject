@@ -2,14 +2,36 @@
 {
     using BJK.TickerExtract.Interfaces;
     using Newtonsoft.Json;
+    using Microsoft.Extensions.Configuration;
+
     public class GetPersonalData
     {
         private const string READER_FILE = "PersonalData.json";
         private const string FOLDER_NAME = "FinanceDecisionMaker";
+        private const string APP_SETTINGS = "appsettings.json";
         private static PersonalDataConfig? config;
 
-        public static IPersonalData Configuration => GetConfig();
+        public static IPersonalData Configuration => GetConfigFromAppSettingsFile();
 
+        private static IPersonalData GetConfigFromAppSettingsFile()
+        {
+            if (config == null)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile(APP_SETTINGS, optional: false, reloadOnChange: true)
+                    .Build();
+
+                PersonalDataConfig? readFromAppsettings = configuration.GetSection("PersonalData").Get<PersonalDataConfig>();
+
+                if (readFromAppsettings != null)
+                {
+                    config = readFromAppsettings;
+                }
+            }
+            
+            return config ?? new PersonalDataConfig();
+        }
         private static IPersonalData GetConfig()
         {
             MakeSureFileExists();

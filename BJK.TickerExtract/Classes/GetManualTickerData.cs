@@ -2,15 +2,35 @@
 {
     using BJK.TickerExtract.Interfaces;
     using Newtonsoft.Json;
+    using Microsoft.Extensions.Configuration;
 
     public static class GetManualTickerData
     {
         private const string READER_FILE = "ManualTickers.json";
         private const string FOLDER_NAME = "FinanceDecisionMaker";
+        private const string APP_SETTINGS = "appsettings.json";
         private static ManualTickerConfiguration? config;
 
-        public static IManualTickerConfig Configuration => GetConfig();
+        public static IManualTickerConfig Configuration => GetConfigFromAppSettingsFile();
 
+        private static IManualTickerConfig GetConfigFromAppSettingsFile()
+        {
+            if (config == null)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile(APP_SETTINGS, optional: false, reloadOnChange: true)
+                    .Build();
+
+                ManualTickerConfiguration? manualTickerConfig = configuration.GetSection("ManualTickers").Get<ManualTickerConfiguration>();
+
+                if (manualTickerConfig != null)
+                {
+                    config = manualTickerConfig;
+                }
+            }
+            return config ?? new ManualTickerConfiguration();
+        }
         private static IManualTickerConfig GetConfig()
         {
             MakeSureFileExists();

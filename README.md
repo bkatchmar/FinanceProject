@@ -67,5 +67,5 @@ The purpose of this library is to collect market data for financial instrumnents
 * [x] Generate a CSV file that acts as my core sheet
 * [x] Define my decision making process over what to invest in next, or what my next moves may be
 * [ ] Currenly go with a week-over-week decision making model, but open the possibility to make bi-weekly or even monthly moves as my experience increases
-* [ ] Graduate from a CSV file and automatically update a Google Sheet document, this opens the possibility to use Google Lookout Studio for future visualizations of my data
+* [ ] Graduate from a CSV file and automatically update a Google Sheet document, this opens the possibility to use Google Lookout Studio for further visualizations of my data
 * [ ] Open up the possibilty for Forex trading down the road

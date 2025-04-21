@@ -4,17 +4,11 @@ using BJK.FinanceApi.Classes;
 using BJK.FinanceApi.Interfaces;
 using BJK.TickerExtract.Classes;
 using BJK.TickerExtract.Interfaces;
-using Microsoft.Extensions.Configuration;
 
 // Load configurations
-IConfigurationRoot configuration = new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .Build();
-
-IReaderConfig? config = configuration.GetSection("ReaderConfig").Get<ReaderConfiguration>();
-IManualTickerConfig? manualTickerConfig = configuration.GetSection("ManualTickers").Get<ManualTickerConfiguration>();
-IPersonalData? personalDataConfig = configuration.GetSection("PersonalData").Get<PersonalDataConfig>();
+IReaderConfig? config = GetReaderData.Configuration;
+IManualTickerConfig? manualTickerConfig = GetManualTickerData.Configuration;
+IPersonalData? personalDataConfig = GetPersonalData.Configuration;
 
 // Might as well just check to see if we even have a file to write to
 if (string.IsNullOrEmpty(config.FileToWriteTo))
