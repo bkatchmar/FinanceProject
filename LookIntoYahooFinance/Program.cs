@@ -53,7 +53,7 @@ Console.WriteLine("Begin writing the next moves file");
 // Start looking into the decision maker
 DecisionMaker decisionMaker = new(personalDataConfig, yahooExtractor.InstrumentsInformation)
 {
-    IncludeCoveCalls = false
+    IncludeCoverCalls = false
 };
 decisionMaker.BuildStrategies();
 
