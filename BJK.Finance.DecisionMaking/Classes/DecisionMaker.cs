@@ -10,7 +10,7 @@
         public IPersonalData PersonalDataConfig { get; } = Personal;
         public IEnumerable<IFinanceInstrument> InstrumentsInformation { get; } = InstrumentData;
         public IEnumerable<IOptionStrategyPossibility> PossibleOptionsStrategies => possibleMoves;
-        public bool IncludeCoveCalls { get; set; } = true;
+        public bool IncludeCoverCalls { get; set; } = true;
         public bool IncludeCashSecuredPuts { get; set; } = true;
         public void BuildStrategies()
         {
@@ -30,7 +30,7 @@
                 cashSecuredPuts.Add(cashSecuredPut);
             }
 
-            if (IncludeCoveCalls)
+            if (IncludeCoverCalls)
             {
                 possibleMoves.AddRange(coverCalls.Where(s => s.ContractsCanAfford >= contactsWillingToBuy && PersonalDataConfig.RatingsTolerance.ToList().Contains(s.FinanceInstrument.AnalystRating)).OrderByDescending(s => s.ContractsCanAfford));
             }
