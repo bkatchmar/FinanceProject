@@ -1,0 +1,6 @@
+@BJK.Finance.WebAPI_HostAddress = http://localhost:5267
+
+GET {{BJK.Finance.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

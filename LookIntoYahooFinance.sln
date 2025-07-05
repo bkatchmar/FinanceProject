@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJK.Finance.DecisionMaking"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJK.Finance.DecisionMaking.Test", "BJK.Finance.DecisionMaking.Test\BJK.Finance.DecisionMaking.Test.csproj", "{BBC5788E-3CD2-4A2E-8517-14E9D769D650}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJK.Finance.WebAPI", "BJK.Finance.WebAPI\BJK.Finance.WebAPI.csproj", "{44E23A1B-9D19-49D3-A9F9-7ADC9AE19174}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,8 +47,15 @@ Global
 		{BBC5788E-3CD2-4A2E-8517-14E9D769D650}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBC5788E-3CD2-4A2E-8517-14E9D769D650}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBC5788E-3CD2-4A2E-8517-14E9D769D650}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44E23A1B-9D19-49D3-A9F9-7ADC9AE19174}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44E23A1B-9D19-49D3-A9F9-7ADC9AE19174}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44E23A1B-9D19-49D3-A9F9-7ADC9AE19174}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44E23A1B-9D19-49D3-A9F9-7ADC9AE19174}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EAED74FB-76E0-4DCF-94BD-C5660191DA41}
 	EndGlobalSection
 EndGlobal
