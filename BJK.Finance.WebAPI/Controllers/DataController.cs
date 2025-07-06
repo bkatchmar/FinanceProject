@@ -20,7 +20,7 @@ namespace BJK.Finance.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTickerData()
+        public async Task<ActionResult<List<Strategy>>> GetTickerData()
         {
             List<Strategy> rtnVal = [];
 
@@ -89,7 +89,8 @@ namespace BJK.Finance.WebAPI.Controllers
             // Start looking into the decision maker
             DecisionMaker decisionMaker = new(request.PersonalData, yahooExtractor.InstrumentsInformation)
             {
-                IncludeCoverCalls = false
+                IncludeCoverCalls = request.IncludeCoverCalls,
+                IncludeCashSecuredPuts = request.IncludeCashSecuredPuts
             };
             decisionMaker.BuildStrategies();
 

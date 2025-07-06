@@ -17,7 +17,7 @@ namespace BJK.Finance.WebAPI.Controllers
         [HttpGet]
         public IActionResult GetSettings()
         {
-            return Ok(_appSettings.PersonalData);
+            return Ok(_appSettings);
         }
     }
 }
