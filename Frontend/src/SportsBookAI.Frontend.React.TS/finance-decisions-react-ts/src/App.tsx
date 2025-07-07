@@ -10,6 +10,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import Table from 'react-bootstrap/Table'
 import { type DefaultSettings } from "./models/settings"
 import { type Strategy } from "./models/strategy"
+import { type GetStrategiesRequest } from "./models/strategies.get.request"
 
 function App() {
   const API_URL: string = import.meta.env.VITE_API_URL
@@ -171,7 +172,7 @@ function App() {
         </Accordion.Item>
       </Accordion>
       <Button variant="info" className='mt-1' disabled={loadingData} onClick={async () => {
-        let requestBody = {
+        const requestBody: GetStrategiesRequest = {
           "tickersToOmit": toOmit,
           "personalData": {
             "uninvestedCash": uninvested,
