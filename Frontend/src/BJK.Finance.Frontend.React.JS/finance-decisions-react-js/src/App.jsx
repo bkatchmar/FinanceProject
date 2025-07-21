@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import { useSettingsLoad } from './hooks/useSettingsLoad'
+import { useSettingsStore } from './stores/settingsStore'
 import axios from 'axios'
 import Accordion from 'react-bootstrap/Accordion'
 import Button from 'react-bootstrap/Button'
@@ -11,9 +13,18 @@ import Table from 'react-bootstrap/Table'
 
 function App() {
   const API_URL = import.meta.env.VITE_API_URL
-  const [settingsLoaded, setSettingsLoaded] = useState(false)
-  const [uninvested, setUninvested] = useState(0.0)
-  const [minimum, setMinimum] = useState(0)
+  const ALL_RATINGS = ["Buy", "Strong Buy", "Hold", "N/A", "Underperform"]
+  const ALL_STRATEGIES = ["Cover Call", "Cash Secured Put"]
+  const { settingsLoaded, initialLoadSettings } = useSettingsLoad(`${API_URL}/DefaultSettings`)
+
+  // State variables from global store
+  const {
+    uninvested,
+    minimum,
+    setUninvested,
+    setMinimum
+  } = useSettingsStore()
+
   const [ratings, setRatings] = useState(["Buy", "Strong Buy", "Hold", "N/A", "Underperform"])
   const [strategies, setStrategies] = useState(["Cash Secured Put"])
   const [toOmit, setToOmit] = useState([])
@@ -22,30 +33,17 @@ function App() {
   const [loadingData, setLoadingData] = useState(false)
 
   // Similar to componentDidMount and componentDidUpdate:
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await axios.get(`${API_URL}/DefaultSettings`)
-        setUninvested(result["data"]["personalData"]["uninvestedCash"])
-        setMinimum(result["data"]["personalData"]["minumumUnitsToBuy"])
-        setRatings(result["data"]["personalData"]["ratingsTolerance"])
-        setToOmit(result["data"]["tickersToOmit"])
-        // tickersToOmit
-      } catch (error) {
-        console.error('Error fetching data:', error)
-        setUninvested(1000)
-        setMinimum(100)
-        setRatings(["Buy", "Strong Buy", "Hold", "N/A", "Underperform"])
-        setToOmit([])
-      } finally {
-        setSettingsLoaded(true)
-      }
-    }
+  useEffect(() => { }, [])
 
-    if (!settingsLoaded) {
-      fetchData()
+  // `settingsLoaded` will be true once the custom hook has completed
+  useEffect(() => {
+    if (settingsLoaded) {
+      setUninvested(initialLoadSettings.uninvested)
+      setMinimum(initialLoadSettings.minimum)
+      setRatings(initialLoadSettings.ratings)
+      setToOmit(initialLoadSettings.toOmit)
     }
-  }, [])
+  }, [settingsLoaded, initialLoadSettings])
 
   return (
     <Container fluid>
@@ -88,105 +86,36 @@ function App() {
               </InputGroup>
               <Form.Group className="mt-2 mb-1">
                 <Form.Label>Ratings Tolerance</Form.Label>
-                <Form.Check
+                {ALL_RATINGS.map((rating, rIndex) => <Form.Check
+                  key={`rating-radio-${rIndex}`}
                   type="checkbox"
-                  label={"Strong Buy"}
-                  checked={ratings.includes("Strong Buy")}
+                  label={rating}
+                  checked={ratings.includes(rating)}
                   disabled={!settingsLoaded}
                   onChange={(e) => {
-                    const rating = "Strong Buy"
                     if (e.target.checked) {
                       setRatings([...ratings, rating])
                     } else {
                       setRatings(ratings.filter((v) => v !== rating))
                     }
                   }}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label={"Buy"}
-                  checked={ratings.includes("Buy")}
-                  disabled={!settingsLoaded}
-                  onChange={(e) => {
-                    const rating = "Buy"
-                    if (e.target.checked) {
-                      setRatings([...ratings, rating])
-                    } else {
-                      setRatings(ratings.filter((v) => v !== rating))
-                    }
-                  }}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label={"Hold"}
-                  checked={ratings.includes("Hold")}
-                  disabled={!settingsLoaded}
-                  onChange={(e) => {
-                    const rating = "Hold"
-                    if (e.target.checked) {
-                      setRatings([...ratings, rating])
-                    } else {
-                      setRatings(ratings.filter((v) => v !== rating))
-                    }
-                  }}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label={"N/A"}
-                  checked={ratings.includes("N/A")}
-                  disabled={!settingsLoaded}
-                  onChange={(e) => {
-                    const rating = "N/A"
-                    if (e.target.checked) {
-                      setRatings([...ratings, rating])
-                    } else {
-                      setRatings(ratings.filter((v) => v !== rating))
-                    }
-                  }}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label={"Underperform"}
-                  checked={ratings.includes("Underperform")}
-                  disabled={!settingsLoaded}
-                  onChange={(e) => {
-                    const rating = "Underperform"
-                    if (e.target.checked) {
-                      setRatings([...ratings, rating])
-                    } else {
-                      setRatings(ratings.filter((v) => v !== rating))
-                    }
-                  }}
-                />
+                />)}
               </Form.Group>
               <Form.Group className="mt-2">
                 <Form.Label>Strategies To Include</Form.Label>
-                <Form.Check
+                {ALL_STRATEGIES.map((strategy, sIndex) => <Form.Check
+                  key={`strat-i-${sIndex}`}
                   type="checkbox"
-                  label={"Cover Call"}
-                  checked={strategies.includes("Cover Call")}
+                  label={strategy}
+                  checked={strategies.includes(strategy)}
                   onChange={(e) => {
-                    const rating = "Cover Call"
                     if (e.target.checked) {
-                      setStrategies([...strategies, rating])
+                      setStrategies([...strategies, strategy])
                     } else {
-                      setStrategies(strategies.filter((v) => v !== rating))
+                      setStrategies(strategies.filter((v) => v !== strategy))
                     }
                   }}
-                />
-                <Form.Check
-                  type="checkbox"
-                  label={"Cash Secured Put"}
-                  checked={strategies.includes("Cash Secured Put")}
-                  onChange={(e) => {
-                    const rating = "Cash Secured Put"
-                    if (e.target.checked) {
-                      setStrategies([...strategies, rating])
-                    } else {
-                      setStrategies(strategies.filter((v) => v !== rating))
-                    }
-                  }}
-                />
+                />)}
               </Form.Group>
             </Form>
           </Accordion.Body>
@@ -231,7 +160,7 @@ function App() {
         </Accordion.Item>
       </Accordion>
       <Button variant="info" className='mt-1' disabled={loadingData} onClick={async () => {
-        let requestBody = {
+        const requestBody = {
           "tickersToOmit": toOmit,
           "personalData": {
             "uninvestedCash": uninvested,
